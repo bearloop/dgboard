@@ -1,0 +1,193 @@
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f1f1f1;
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+
+.page {
+  position: relative;
+  width: 230mm;
+  min-height: 300mm;
+  padding: 0mm;
+  margin: 10mm auto;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 0 10px lightgrey;
+}
+
+.navbar {
+  border-radius: 2px;
+  height: 100px;
+}
+
+.card,
+.card-header,
+.card-footer {
+  border: none;
+  background-color: white;
+  border-radius: 0px;
+}
+
+/*
+.card-body {
+  margin-top: 5px;
+  border-bottom: 2px solid #a7b3be;
+}
+*/
+
+.card-header {
+  min-height: 35pt;
+  max-height: 35pt;
+  font-size: 18px;
+  color: #2d3e4f;
+  font-weight: 800;
+  border-top: 3px solid #2d3e4f;
+  border-left: 3px solid #2d3e4f;
+}
+
+.card-footer {
+  min-height: 30pt;
+  max-height: 30pt;
+  font-size: 18px;
+  color: #2d3e4f;
+  font-weight: 800;
+  border-bottom: 3px solid #ebebeb;
+  border-right: 3px solid #ebebeb;
+}
+
+#input_srch {
+  border-radius: 0pc;
+  border: 0px solid #7b8a8b;
+  border-bottom: 1px solid #7b8a8b;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #2d3e4f;
+}
+
+#input_srch:focus {
+  border: 1.2px solid #2d3e4f;
+}
+
+.dash-delete-cell {
+  text-align: center !important;
+}
+
+/*
+#special-card-1 {
+  margin-right: 10pt !important;
+}
+
+#special-card-2 {
+  margin-left: 10pt !important;
+}*/
+
+/*.dash-spreadsheet-container .dash-spreadsheet-inner table {
+  --accent: transparent !important;
+  --border: transparent !important;
+  --hover: transparent !important;
+  --background-color-ellipses: transparent !important;
+  --faded-text: transparent !important;
+  --faded-text-header: transparent !important;
+  --selected-background: transparent !important;
+  --faded-dropdown: transparent !important;
+  --muted: transparent !important;
+}*/
+
+.list-group {
+  position: absolute;
+  z-index: 999;
+}
+
+.list-group-item {
+  padding: 9px;
+  background-color: rgb(255, 255, 255);
+  color: #2d3e4f;
+  font-weight: 300;
+  font-size: 12pt;
+  border: 0px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+  width: 100%;
+}
+
+.list-group-item-heading {
+  font-size: 12pt;
+}
+
+.list-group-item-text {
+  font-size: 9pt;
+  margin-bottom: 0.1rem;
+}
+
+.table {
+  margin-top: 1rem;
+  font-size: 11pt;
+  border: 0px solid #ffffff;
+}
+
+/* To remove scrollbar */
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+.main-svg {
+  margin-left: 0pt;
+}
+
+.dropdown-toggle.btn.btn-secondary {
+  background: white;
+  color: #2c3e50;
+  border-color: white;
+  font-weight: 600;
+}
+
+.dropdown-toggle.btn.btn-secondary:focus {
+  border: 1.2px solid #2d3e4f;
+  background: white;
+}
+
+/* Spinners
+#card_spinner_1 {
+  align-content: center;
+  align-items: center;
+  position: fixed;
+}
+
+#card_spinner_2 {
+  align-content: center;
+  align-items: center;
+  margin-top: -15%;
+}
+*/
+
+#fig_test_1,
+#fig_test_2,
+#fig_test_4 {
+  margin-left: -25pt;
+}
+
+#fig_assets_1,
+#fig_assets_2,
+#fig_assets_3,
+#fig_assets_4,
+#fig_assets_5 {
+  margin-left: -25pt;
+}
+
+/*
+.custom_cb:checked,
+.custom_cb::before {
+  color: #fff;
+  border-color: #eb6864;
+  background-color: #eb6864;
+}
+*/
+
+.modebar {
+  display: none;
+}
