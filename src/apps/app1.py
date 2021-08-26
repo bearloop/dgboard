@@ -216,7 +216,7 @@ def update_product_list(input_srch, fetched_data):
                                     except: vw_id_2 = ""
 
                                     try: int(vw_id) #check whether vwid is not a character
-                                    except: 
+                                    except: #otherwise assign vw_id_2 to vw_id if there is a vw_id
                                         try:
                                             if vw_id_2 != "":
                                                 vw_id = vw_id_2
@@ -248,7 +248,20 @@ def update_product_list(input_srch, fetched_data):
                                     ddown_list.append(dbc.ListGroupItem([heading, txt], id="button-item-"+str(ind), n_clicks=0, action=True))
                                     #print(ind)
                                     ind+=1
-                                    
+                                
+                                # This snippet adds to the search output list creating the respective buttons, otherwise when used as input 
+                                # to the update_row_ids callback function there will be an input error
+                                list_length = len(ddown_list)
+                                if list_length < 5:
+                                    for i in range(5-list_length):
+                                        ddown_list.append(dbc.ListGroupItem([heading, txt], id="button-item-"+str(ind), n_clicks=0, action=True))
+                                        sup_dct[ind] = {'id': dg_id, 'name': name_val,
+                                                    'isin': isin_val,'symbol': sym_val,
+                                                    'productType': prodType, 'currency': currency,
+                                                    'exchangeId': exchange, 'vwdId': vw_id,'totalExpenseRatio': expRatio}
+                                        ind+=1
+
+                                # Create group
                                 ddown_group = dbc.ListGroup(ddown_list)
 
                                 return ddown_group, sup_dct
@@ -275,38 +288,69 @@ def update_product_list(input_srch, fetched_data):
 # Update dcc.Store - fav_table_data
 
 @app.callback(Output("favTable", "derived_virtual_row_ids"),
-             [Input("button-item-0","n_clicks")],
-            #   Input("button-item-1","n_clicks"),
-            #   Input("button-item-2","n_clicks")],
+             [Input("button-item-0","n_clicks"),
+              Input("button-item-1","n_clicks"),
+              Input("button-item-2","n_clicks"),
+              Input("button-item-3","n_clicks"),
+              Input("button-item-4","n_clicks")],
              [State("srch_dict","data"),
               State("favTable", "derived_virtual_row_ids")]
 )
-def update_row_ids(n_clicks0,srch_dict, row_ids):#n_clicks1,n_clicks2, 
+def update_row_ids(n_clicks0, n_clicks1, n_clicks2, n_clicks3, n_clicks4, srch_dict, row_ids):
 
     print('-------- Entered: update_row_ids --------')
-    # print(srch_dict)
-    # try:
-    #     if n_clicks0 > 0: new_id = srch_dict['0']['id']
-    #     if n_clicks1 > 0: new_id = srch_dict['1']['id']
-    #     if n_clicks2 > 0: new_id = srch_dict['2']['id']
-    #     else: new_id = -1234
-
-    #     if new_id != -1234:
-    #         if new_id not in row_ids:
-
-    #             row_ids.append(new_id)
-
-    #         print('Returning Row IDs: ' +str(row_ids))
-    #         return row_ids
-    #     else:
-    #         raise PreventUpdate
-
-    # except:
-    #     raise PreventUpdate
+    
+    print('-------------------------------------------------------')
+    print(srch_dict)
+    print('-------------------------------------------------------')
 
     if n_clicks0 > 0:
 
         new_id = srch_dict['0']['id']
+
+        if new_id not in row_ids:
+
+            row_ids.append(new_id)
+
+        print('Returning Row IDs: ' +str(row_ids))
+        return row_ids
+    
+    if n_clicks1 > 0:
+        print('In btn 1')
+        new_id = srch_dict['1']['id']
+
+        if new_id not in row_ids:
+
+            row_ids.append(new_id)
+
+        print('Returning Row IDs: ' +str(row_ids))
+        return row_ids
+
+    if n_clicks2 > 0:
+        print('In btn 2')
+        new_id = srch_dict['2']['id']
+
+        if new_id not in row_ids:
+
+            row_ids.append(new_id)
+
+        print('Returning Row IDs: ' +str(row_ids))
+        return row_ids
+    
+    if n_clicks3 > 0:
+        print('In btn 3')
+        new_id = srch_dict['3']['id']
+
+        if new_id not in row_ids:
+
+            row_ids.append(new_id)
+
+        print('Returning Row IDs: ' +str(row_ids))
+        return row_ids
+    
+    if n_clicks4 > 0:
+        print('In btn 4')
+        new_id = srch_dict['4']['id']
 
         if new_id not in row_ids:
 
@@ -342,18 +386,26 @@ def update_store_fav_table_data(n_intervals, row_ids, srch_dict, fav_table_data)
         # Add new data to dict
         if srch_dict is not None: # First check: does srch_dict exists ?
             if (type(srch_dict) == dict) & (len(srch_dict)>0): # Second check: is it a dictionary with values ?
-                new_isin = srch_dict['0']['isin']
 
-                if new_isin not in fav_table_data['isin']:
-                    for k in fav_table_data.keys():
-                        fav_table_data[k][new_isin] = srch_dict['0'][k]
-                        print(fav_table_data[k][new_isin])
+                # This checks whether row_ids exists and that it is not equal to '', then loops over the search dict to find the button position
+                if (row_ids is not None) & (row_ids[-1]!=''):
+                    for pos,val in srch_dict.items():
+                        if val['id'] == row_ids[-1]:
+                            #btn_pos = pos
+                            new_isin = srch_dict[pos]['isin']
+
+                            if new_isin not in fav_table_data['isin']:
+                                for k in fav_table_data.keys():
+                                    fav_table_data[k][new_isin] = srch_dict[pos][k]
+                                    print(fav_table_data[k][new_isin])
+                # else:
+                #     btn_pos = '0'
 
 
         # That bit makes sure that row_ids is initialised even if the user doesn't make any searches
         if len(row_ids)==0:
             
-            for existing_isin  in fav_table_data['id']:
+            for existing_isin in fav_table_data['id']:
                 row_ids.append(fav_table_data['id'][existing_isin])
 
             if '' not in row_ids:

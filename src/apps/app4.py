@@ -70,16 +70,16 @@ def show_markets(input_d, fav_table_data):
     # a) you're not logged in
     # b) you're logged in but the fav table is empty
 
-    if (input_d is None) or (len(input_d)<=1) or (fav_table_data is None) or (len(fav_table_data)<1):
-        table_columns = [dict(id=i, name=i) for i in table_col_names_a+table_col_names_b]
-        table_data = [{'Symbol':'','Description':'','Last Price':'','FX':'',
-                       'Ret 1w':'','Ret 1m':'','Ret 3m':'','Ret 1Yr':'','SD 1m':'','SD 1Yr':'','VaR 1m':''} for row in range(30)]
+    # if ((input_d is None) & (len(input_d)<=1)) or ((fav_table_data is None) or (len(fav_table_data['id'])<1)):
+    #     table_columns = [dict(id=i, name=i) for i in table_col_names_a+table_col_names_b]
+    #     table_data = [{'Symbol':'','Description':'','Last Price':'','FX':'',
+    #                    'Ret 1w':'','Ret 1m':'','Ret 3m':'','Ret 1Yr':'','SD 1m':'','SD 1Yr':'','VaR 1m':''} for row in range(30)]
         
-        return table_data, table_columns, format_data_conditional
+    #     return table_data, table_columns, format_data_conditional
 
     # Otherwise, you must be logged in and have some fav assets
-    else:
-        
+    # else:
+    try:
         table_columns = [dict(id=i, name=i) for i in table_col_names_a] + [dict(id=i, name=i, type='numeric', format=percentage) for i in table_col_names_b]
 
         df, curr_dct, desc_dct = return_assets_ts(input_d)
@@ -102,6 +102,11 @@ def show_markets(input_d, fav_table_data):
 
         cells_style = return_conditional_styles(table_data)
         return table_data, table_columns, cells_style
+    except:
+        table_columns = [dict(id=i, name=i) for i in table_col_names_a+table_col_names_b]
+        table_data = [{'Symbol':'','Description':'','Last Price':'','FX':'',
+                    'Ret 1w':'','Ret 1m':'','Ret 3m':'','Ret 1Yr':'','SD 1m':'','SD 1Yr':'','VaR 1m':''} for row in range(30)]
+        return table_data, table_columns, format_data_conditional
 
 
 def return_assets_ts(input_d):
