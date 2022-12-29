@@ -72,7 +72,7 @@ card_2 = dbc.Card(
                                                     nav=False,
                                                     label="Date Range: 1Y",
                                                     right=True,
-                                                    bs_size="sm",
+                                                    size="sm",
                                                     id='target_date',
                                                     style={'padding-left':'20px'}
                                                 ),

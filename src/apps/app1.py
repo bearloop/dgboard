@@ -17,15 +17,16 @@ print('got in L1:')
 # Log in card
 
 email_input = dbc.InputGroup(
+                        
                         [
-                            dbc.InputGroupAddon("Username", addon_type="prepend"),
+                            dbc.InputGroupText("Username"),
                             dbc.Input(type="text", id="input_usr", placeholder="Enter username",disabled=False)
                         ], size='sm',className="mt-2"
                     )
 
 password_input = dbc.InputGroup(
                         [
-                            dbc.InputGroupAddon("Password", addon_type="prepend"),
+                            dbc.InputGroupText("Password"),
                             dbc.Input(type="password",id="input_psw", placeholder="Enter password",disabled=False)
                         ], size='sm',className="mt-2"
                     )
@@ -43,7 +44,7 @@ login_card = dbc.Card(
                                             n_clicks=0,
                                             outline=True,
                                             className="mt-2 mb-2",
-                                            block=True,
+                                            
                                             size='sm',
                                             color="primary"
                                         ))])
@@ -117,7 +118,7 @@ layout1 = create_layout_1()
      Output("input_usr","disabled"),
      Output("input_psw","disabled")],
     [Input("login_button", "n_clicks")],
-    state=[State("input_usr", "value"),
+    [State("input_usr", "value"),
            State("input_psw", "value"),
            State("fetched_data", "data"),
            State("log_button_data", "data"),

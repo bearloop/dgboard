@@ -37,7 +37,7 @@ card_1 = dbc.Card(
                                                     nav=False,
                                                     label="Date Range",
                                                     right=True,
-                                                    bs_size="sm",
+                                                    size="sm",
                                                     id='target_date_2',
                                                     style={'padding-left':'5px'}
                                                 ),
@@ -54,7 +54,7 @@ card_1 = dbc.Card(
                         ], className="m-4", style={'minHeight':'300px','maxHeight':'300px'}
                        )
 
-assets_checklist = dbc.FormGroup(
+assets_checklist = html.Div(
     [
         dbc.Label("Choose a bunch"),
         dbc.Checklist(
@@ -81,7 +81,7 @@ card_2 = dbc.Card(
                                                     ],
                                                     label="Holdings",
                                                     right=True,
-                                                    bs_size="sm",
+                                                    size="sm",
                                                     id='select_assets',
                                                     style={'padding-left':'5px'}
                                                 ),
